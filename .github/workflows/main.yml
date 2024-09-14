@@ -21,4 +21,7 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         port: 22
         script: |
-          whoami
+          ls
+          cd /home/ubuntu
+          ls
+          ./test.sh
