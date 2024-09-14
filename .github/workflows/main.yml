@@ -21,6 +21,6 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         script: |
           # Navigate to the directory where the .sh file is
-          cd /path/to/your/sh/file
+          cd /home/ubuntu
           # Run the .sh file
           bash test.sh
