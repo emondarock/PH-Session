@@ -24,6 +24,7 @@ jobs:
       # Step 3: Build the Docker image
       - name: Build Docker image
         run: |
+          cd session-1
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest .
 
       # Step 4: Push Docker image to DockerHub
