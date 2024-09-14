@@ -41,17 +41,16 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           script: |
-            sudo su
             # Pull the latest image
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
 
             # Check if the container is running and stop/remove it if it exists
-            if [ "$(docker ps -q -f name=ph-session-1)" ]; then
+            if [ "$(sudo docker ps -q -f name=ph-session-1)" ]; then
               echo "Stopping and removing existing container..."
-              docker stop ph-session-1
-              docker rm ph-session-1
+              sudo docker stop ph-session-1
+              sudo docker rm ph-session-1
             fi
 
             # Run the container
             echo "Starting a new container..."
-            docker run -d --name ph-session-1 -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
+            sudo docker run -d --name ph-session-1 -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
