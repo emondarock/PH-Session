@@ -30,7 +30,7 @@ jobs:
       # Step 4: Push Docker image to DockerHub
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
 
       # Step 5: SSH to EC2 and deploy the Docker container
       - name: Deploy to EC2
@@ -42,15 +42,15 @@ jobs:
           port: 22
           script: |
             # Pull the latest image
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
             
             # Check if the container is running and stop/remove it if it exists
-            if [ "$(docker ps -q -f name=my-app)" ]; then
+            if [ "$(docker ps -q -f name=ph-session-1)" ]; then
               echo "Stopping and removing existing container..."
-              docker stop my-app
-              docker rm my-app
+              docker stop ph-session-1
+              docker rm ph-session-1
             fi
             
             # Run the container
             echo "Starting a new container..."
-            docker run -d --name my-app -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            docker run -d --name ph-session-1 -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
