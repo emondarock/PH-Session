@@ -41,6 +41,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           script: |
+            sudo su
             # Pull the latest image
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ph-session-1:latest
 
